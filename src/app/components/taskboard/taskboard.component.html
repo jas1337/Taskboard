@@ -1,0 +1,29 @@
+<div clas="row ">
+  <div (drop)="onDropToPool()" (dragover)="onDragOver($event)" class="col-md-6 offset-md-3 my-3 p-4 card text-white bg-primary">
+    <div class="bs-component ">
+      <h1 class="text-center">Task Pool</h1>
+      <div class="list-group">
+        <div *ngFor="let task of taskPool; let i = index" class=" py-1">
+          <button draggable="true" (drag)="onDragFromPool(task)" type="button" class="btn btn-secondary btn-block btn-sm">{{task.details}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row my-5">
+  <div (drop)="onDropToUser(user)" (dragover)="onDragOver($event)" class="col-md-4" [ngClass]="{'my-5':i === 2,'my-4':i === 0}"
+    *ngFor="let user of users;let i= index">
+    <div class="bs-component p-3 card text-white bg-primary">
+      <h2 class="text-center">{{user.username}}</h2>
+      <div class="list-group">
+        <div *ngFor="let task of user.userTasks" class="py-1 ">
+          <button draggable="true" (drag)="onDragFromUser(user,task)" type="button" class="btn btn-secondary btn-block btn-sm ">{{task.details}}</button>
+        </div>
+      </div>
+      <br>
+      <br>
+      <h1 class="text-right pt-3" style="position:absolute;bottom:0;right:15px">{{userOrder[i]}}</h1>
+    </div>
+  </div>
+</div>
