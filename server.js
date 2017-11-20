@@ -10,12 +10,20 @@ const users = require('./routes/users');
 const tasks = require('./routes/tasks');
 
 
+
 // Connect to MongoDB
-mongoose.connect(config.database);
-//Log on connection
-mongoose.connection.on('connected', () => {
-    console.log('Connected to database :' + config.database);
-});
+if (process.env.NODE_ENV === 'test') {
+    mongoose.connect(config.databaseTest);
+    mongoose.connection.on('connected', () => {
+        console.log('Connected to database :' + config.databaseTest);
+    });
+} else {
+    mongoose.connect(config.database);
+    mongoose.connection.on('connected', () => {
+        console.log('Connected to database :' + config.database);
+    });
+}
+
 //Log on error
 mongoose.connection.on('error', (err) => {
     console.log('Database error :' + err);
@@ -30,3 +38,7 @@ app.use('/users', users);
 app.use('/tasks', tasks);
 
 app.listen(port, () => console.log("Server running on port :" + port));
+
+
+module.exports = app; // for testing
+

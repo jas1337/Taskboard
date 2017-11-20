@@ -39,10 +39,15 @@ export class TaskboardComponent implements OnInit {
   onDragFromPool(task) {
     this.currentTask = task;
     this.currentUser = undefined;
+    return this.currentTask;
   }
   onDragFromUser(user, task) {
     this.currentUser = user;
     this.currentTask = task;
+  }
+  onDragOver(event) {
+    event.stopPropagation();
+    event.preventDefault();
   }
 
   onDropToPool() {
@@ -90,8 +95,8 @@ export class TaskboardComponent implements OnInit {
     }
 
     //drag from one user to another user
-    else if (!alredyExist && this.currentUser !== undefined && user !== this.currentUser) {
-    
+    else if (!alredyExist && this.currentUser != undefined && user !== this.currentUser) {
+
       //remove this.currentTask from all users
       for (let i = 0; i < this.users.length; i++) {
         //check if user owns this.currentTask
@@ -117,9 +122,6 @@ export class TaskboardComponent implements OnInit {
     }
   }
 
-  onDragOver(event) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
+
 
 }

@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 // Task Schema
 const TaskSchema = mongoose.Schema({
     details: {
-        type: String
+        type: String,
+        required: true
     },
 });
 
