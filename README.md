@@ -55,7 +55,7 @@
     Start server on port 3000 :
 </p>
 <p>
-    nodemon server.js
+    node server.js
 </p>
 <p>
     Start front-end on port 4200 :
